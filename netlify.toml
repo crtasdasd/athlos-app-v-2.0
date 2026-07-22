@@ -1,0 +1,15 @@
+# Netlify build config for ATHLOS.
+#
+# The two VITE_SUPABASE_* values below are PUBLIC by design (the publishable key
+# is meant for the browser and is already visible in the client bundle), so they
+# live here to guarantee they reach the build. Netlify UI env vars were not
+# reaching builds, which left production on a placeholder URL (demo/offline mode).
+# NEVER put the service-role key, AI keys, or any secret here.
+
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  VITE_SUPABASE_URL = "https://wslbxwkqstwlqzollmym.supabase.co"
+  VITE_SUPABASE_ANON_KEY = "sb_publishable_LZbH1_4Sb4s497_5SSf_Ww_xCSoDc8t"

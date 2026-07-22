@@ -1,0 +1,205 @@
+/* ============================================================
+   ATHLOS — Marble (Greco-Roman) Design System
+   Portable theme. Drop into any app; apply to your own layout.
+   Framework-agnostic CSS custom properties + primitive classes.
+   ============================================================ */
+
+/* 1 ─ FONTS ───────────────────────────────────────────────────
+   Load once in <head> (or import in your CSS bundle):
+   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800;900&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500;1,600&family=Barlow+Condensed:wght@600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+*/
+
+/* 2 ─ TOKENS ──────────────────────────────────────────────────
+   Reference these everywhere — never hard-code hex values.       */
+:root {
+  /* Surfaces — pure white (cards separate via veins/borders, not tint) */
+  --at-bg:          #ffffff;  /* page / screen base    */
+  --at-surface:     #ffffff;  /* raised card (light)   */
+  --at-surface-2:   #ffffff;  /* card gradient bottom  */
+  --at-ink-bg:      #14120e;  /* dark "oracle" panel   */
+
+  /* Ink (text) */
+  --at-ink:         #1c1814;  /* primary text          */
+  --at-ink-soft:    #3a342c;  /* secondary text        */
+  --at-muted:       #8a8071;  /* tertiary / captions   */
+  --at-on-dark:     #f4efe6;  /* text on ink panels    */
+
+  /* Accents */
+  --at-bronze:      #1F7A52;  /* labels, ornaments     */
+  --at-gold:        #00FF87;  /* highlights            */
+  --at-laurel:      #1f7a52;  /* classical green       */
+  --at-laurel-lit:  #00ff87;  /* electric brand green  */
+  --at-red:         #b1452f;  /* danger / pain         */
+
+  /* Lines */
+  --at-vein:        #d8cfbd;  /* marble veining border */
+  --at-line:        rgba(28,24,20,0.12);
+  --at-line-soft:   rgba(28,24,20,0.07);
+
+  /* Type families */
+  --at-serif:  'Poppins', system-ui, sans-serif;    /* headings, numerals — UPPERCASE, tracked */
+  --at-body:   'Poppins', system-ui, sans-serif;    /* body copy, quotes */
+  --at-cond:   'Poppins', system-ui, sans-serif;    /* big display labels (workout titles) */
+  --at-mono:   'JetBrains Mono', monospace;         /* kickers, metrics, data, eyebrows */
+
+  /* Radii */
+  --at-r-card: 18px;
+  --at-r-btn:  12px;
+  --at-r-pill: 999px;
+
+  /* Elevation */
+  --at-shadow-card: 0 8px 22px rgba(28,24,20,0.07);
+  --at-shadow-lift: 0 16px 40px rgba(28,24,20,0.22);
+
+  /* Spacing rhythm (use multiples; screens pad 22px) */
+  --at-pad: 22px;
+}
+
+/* Optional dark inversion for "oracle" regions / dark mode shells */
+.at-dark {
+  --at-bg: #14120e;
+  --at-surface: #1f2420;
+  --at-surface-2: #12100d;
+  --at-ink: #f4efe6;
+  --at-ink-soft: #cfc7b8;
+  --at-muted: #8a8071;
+  --at-vein: rgba(255,255,255,0.08);
+  --at-line: rgba(255,255,255,0.08);
+}
+
+/* 3 ─ MARBLE SURFACE ──────────────────────────────────────────
+   Apply to your page/app background for the marble texture.      */
+.at-marble {
+  /* flat parchment — no colour washes; texture comes from the halftone dots */
+  background-color: var(--at-bg);
+}
+
+/* 4 ─ TYPOGRAPHY PRIMITIVES ──────────────────────────────────── */
+.at-eyebrow {            /* mono kicker above headings */
+  font-family: var(--at-mono); font-size: 11px; font-weight: 600;
+  letter-spacing: 0.22em; text-transform: uppercase; color: var(--at-bronze);
+}
+.at-h1 {                 /* engraved page title */
+  font-family: var(--at-serif); font-weight: 800; font-size: 27px;
+  letter-spacing: 0.06em; text-transform: uppercase; color: var(--at-ink); line-height: 1;
+}
+.at-display {            /* big condensed label, e.g. workout name */
+  font-family: var(--at-cond); font-weight: 800; font-size: 27px;
+  text-transform: uppercase; line-height: 0.95; color: var(--at-ink); letter-spacing: 0.01em;
+}
+.at-numeral {            /* serif numbers — scores, metrics */
+  font-family: var(--at-serif); font-weight: 800; color: var(--at-ink);
+}
+.at-quote {              /* italic body / coach voice */
+  font-family: var(--at-body); font-size: 15px; font-style: italic;
+  line-height: 1.45; color: var(--at-ink-soft);
+}
+.at-mono {               /* data / metric text */
+  font-family: var(--at-mono); font-size: 11px; color: var(--at-muted); letter-spacing: 0.04em;
+}
+
+/* 5 ─ SECTION HEADER (engraved rule) ──────────────────────────
+   <div class="at-sec"><span>Today's Session</span></div>          */
+.at-sec { display: flex; align-items: center; gap: 9px; margin: 22px 0 12px; }
+.at-sec > span:first-child {
+  font-family: var(--at-serif); font-weight: 700; font-size: 13.5px;
+  letter-spacing: 0.16em; text-transform: uppercase; color: var(--at-ink); white-space: nowrap;
+}
+.at-sec::after { content: ''; flex: 1; height: 1px; background: var(--at-line); }
+
+/* 6 ─ ORNAMENTS ───────────────────────────────────────────────
+   Greek-key (meander) divider: <div class="at-meander"></div>     */
+.at-meander {
+  height: 14px; width: 120px; background: var(--at-bronze); opacity: 0.5;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='14'%3E%3Cpath d='M0 12h6V3h6v9h6V3h6v9h2' fill='none' stroke='%23000' stroke-width='2'/%3E%3C/svg%3E") repeat-x center / 32px 14px;
+          mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='14'%3E%3Cpath d='M0 12h6V3h6v9h6V3h6v9h2' fill='none' stroke='%23000' stroke-width='2'/%3E%3C/svg%3E") repeat-x center / 32px 14px;
+}
+
+/* 7 ─ CARD ────────────────────────────────────────────────────
+   The base container. Compose your own layouts inside it.        */
+.at-card {
+  background: var(--at-surface);
+  border: 1px solid var(--at-vein);
+  border-radius: var(--at-r-card);
+  box-shadow: var(--at-shadow-card);
+  overflow: hidden;
+}
+/* Fluted-column texture accent (optional) — add as a child:
+   <div class="at-flute"></div> positioned inside a relative card  */
+.at-flute {
+  position: absolute; top: 0; right: 0; width: 90px; height: 100%; pointer-events: none;
+  background-image: repeating-linear-gradient(90deg, rgba(31,122,82,0.07) 0 6px, transparent 6px 14px);
+  opacity: 0.7;
+}
+/* Dark "oracle" card for AI / coach voice — flat ink panel */
+.at-card-dark {
+  background: var(--at-ink-bg);
+  border-radius: var(--at-r-card); color: var(--at-on-dark);
+  position: relative; overflow: hidden;
+}
+
+/* 8 ─ PILL / TAG ─────────────────────────────────────────────── */
+.at-pill {
+  display: inline-flex; align-items: center; gap: 6px; padding: 6px 13px;
+  border-radius: var(--at-r-pill); font-family: var(--at-mono); font-size: 11px; font-weight: 600;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  border: 1px solid var(--at-vein); background: rgba(255,255,255,0.4); color: var(--at-ink-soft);
+}
+.at-pill .at-dot { width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+.at-pill--laurel { color: var(--at-laurel); border-color: rgba(31,122,82,0.3); background: rgba(31,122,82,0.08); }
+.at-pill--warn   { color: #9a7b1e; border-color: rgba(31,122,82,0.4); background: rgba(31,122,82,0.12); }
+.at-pill--danger { color: var(--at-red); border-color: rgba(177,69,47,0.3); background: rgba(177,69,47,0.08); }
+
+/* 9 ─ BUTTONS ─────────────────────────────────────────────────
+   .at-btn + a variant. Add .at-btn--full for 100% width.         */
+.at-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  border: 0; cursor: pointer; border-radius: var(--at-r-btn); padding: 16px 22px;
+  font-family: var(--at-serif); font-weight: 700; font-size: 12.5px;
+  letter-spacing: 0.16em; text-transform: uppercase; transition: transform 0.08s, filter 0.15s;
+}
+.at-btn:active { transform: scale(0.98); }
+.at-btn--full  { width: 100%; }
+.at-btn--solid { background: var(--at-ink); color: var(--at-on-dark); }
+.at-btn--solid .at-arrow { color: var(--at-laurel-lit); }   /* electric-green arrow accent */
+.at-btn--gold  { background: var(--at-bronze); color: #1c1814; }
+.at-btn--ghost { background: transparent; border: 1.5px solid var(--at-vein); color: var(--at-ink); }
+
+/* 10 ─ MEDALLION (bronze progress disc) ───────────────────────
+   For a hero metric. Pair with an SVG ring (see README).         */
+.at-medallion {
+  width: 210px; height: 210px; border-radius: 50%; position: relative;
+  background: #ffffff;
+  box-shadow: var(--at-shadow-lift);
+  display: flex; align-items: center; justify-content: center;
+}
+.at-medallion::before { content: ''; position: absolute; inset: 13px; border-radius: 50%; border: 2px solid var(--at-bronze); opacity: 0.4; }
+
+/* 11 ─ "PILLAR" STAT TILE ─────────────────────────────────────
+   A column with a capital. Put in a grid for stat trios.         */
+.at-pillar {
+  background: var(--at-surface);
+  border: 1px solid var(--at-vein); border-radius: 12px; padding: 16px 10px 14px; text-align: center;
+}
+.at-pillar .at-cap { height: 4px; width: 70%; margin: 0 auto 12px; background: var(--at-bronze); opacity: 0.4; border-radius: 2px; }
+
+/* 12 ─ PROGRESS BAR ──────────────────────────────────────────── */
+.at-track { height: 6px; border-radius: 3px; background: var(--at-vein); overflow: hidden; }
+.at-fill  { height: 100%; border-radius: 3px; background: var(--at-laurel); }
+
+/* 13 ─ LIST ROW (engraved divider between items) ─────────────── */
+.at-row { display: flex; align-items: center; gap: 10px; padding: 16px 18px; border-bottom: 1px solid var(--at-line-soft); }
+.at-row:last-child { border-bottom: 0; }
+
+/* 14 ─ INPUT ─────────────────────────────────────────────────── */
+.at-input {
+  width: 100%; border: 1px solid var(--at-vein); background: rgba(255,255,255,0.5);
+  border-radius: var(--at-r-btn); padding: 14px 16px;
+  font-family: var(--at-body); font-size: 14px; color: var(--at-ink); outline: none;
+}
+.at-input:focus { border-color: var(--at-laurel); }
+
+/* 15 ─ MOTION ─────────────────────────────────────────────────
+   Apply .at-fade on screen/route mount.                          */
+.at-fade { animation: at-fade 0.25s ease; }
+@keyframes at-fade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
